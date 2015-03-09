@@ -1,0 +1,7 @@
+
+on init
+
+service network_start /sbin/network_start.sh
+    user root
+    seclabel u:r:recovery:s0
+    oneshot

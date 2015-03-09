@@ -1,0 +1,46 @@
+USE_CAMERA_STUB := true
+
+# inherit from the proprietary version
+-include vendor/emulator/twrpx86/BoardConfigVendor.mk
+
+TARGET_NO_BOOTLOADER := true
+TARGET_BOOTLOADER_BOARD_NAME := twrpx86
+
+# Platform
+TARGET_NO_RADIOIMAGE := true
+TARGET_BOARD_PLATFORM := sc1
+
+# Architecture
+TARGET_ARCH := x86
+TARGET_CPU_ABI := x86
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_SMP := true
+TARGET_ARCH_VARIANT := x86-atom
+TARGET_ARCH_VARIANT_FPU := sse
+TARGET_CPU_VARIANT := x86
+
+BOARD_KERNEL_BASE := 0x80000000
+# BOARD_KERNEL_CMDLINE :=
+
+BOARD_BOOTIMAGE_PARTITION_SIZE := 0x105c0000
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x105c0000
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x105c0000
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x105c0000
+BOARD_FLASH_BLOCK_SIZE := 131072
+
+TARGET_PREBUILT_KERNEL := device/emulator/twrpx86/kernAl
+
+# Recovery:Start
+
+# Use this flag if the board has a ext4 partition larger than 2gb
+BOARD_HAS_LARGE_FILESYSTEM := true
+
+TARGET_USERIMAGES_USE_EXT4 := true
+
+# TWRP specific build flags
+DEVICE_RESOLUTION := 320x480
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+RECOVERY_SDCARD_ON_DATA := true
+TW_EXCLUDE_MTP := true
+# This excludes parted from the build... parted is prebuilt and for arm CPU only
+BOARD_HAS_NO_REAL_SDCARD := true
