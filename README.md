@@ -7,7 +7,7 @@ To boot this in the emulator, build your recoveryimage. With the Android emulato
 To boot this in the emulator, build your recoveryimage. With the Android emulator make a new device based on a Galaxy Nexus. Name it TWRP. Allow it to have a hardware keyboard and a sdcard sized to 1500MB. Give it a decent sized data partition like 500MB or more. TWRP will be using the data partition as an emulated storage setup as seen on most modern Android devices, so having some extra room may help. Then from your android-sdk/tools folder run the following command:
 
 ```
-./emulator -avd TWRP -ramdisk ~/omni_folder/out/target/product/twrp/ramdisk-recovery.img
+./emulator -avd TWRP -ramdisk ~/omni_folder/out/target/product/twrpx86/ramdisk-recovery.img
 ```
 
 For proper emulation of system, data, cache, boot, and recovery partitions you will have to follow the README included with the TWRP for ARM device files. At this time I don't have a static parted binary that can be used on Intel architecture to repartition the sdcard.img. Once you have a working sdcard image from the ARM emulated TWRP, you can copy the sdcard.img file and modify your AVD to use the file for sdcard instead.
