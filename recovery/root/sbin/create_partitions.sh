@@ -7,25 +7,26 @@
 umount /external_sd
 
 echo "Creating partition table..."
-# Wipe all partitions and give you a gpt partition table
-parted -s /dev/block/mmcblk0 mklabel gpt
+# Wipe all partitions
+sgdisk --zap-all /dev/block/vdd
 # 8MB boot partition
-parted -s /dev/block/mmcblk0 mkpart boot ext2 0 8MB
+sgdisk --new=0:0:+8M --change-name=0:"Boot" /dev/block/vdd
 # 8MB recovery partition
-parted -s /dev/block/mmcblk0 mkpart recovery ext2 8MB 16MB
+sgdisk --new=0:0:+8M --change-name=0:"Recovery" /dev/block/vdd
 # 34 MB cache partition
-parted -s /dev/block/mmcblk0 mkpart cache ext2 16MB 50MB
-# sdcard partition
-parted -s /dev/block/mmcblk0 mkpart sdcard ext4 50MB 1536MB
+sgdisk --new=0:0:+34M --change-name=0:"Cache" /dev/block/vdd
+# sdcard partition fills the rest of the space
+sgdisk --new=0:0:-0 --change-name=0:"SDCard" /dev/block/vdd
 
 echo "Formatting cache..."
 # Format external_sd as vfat
-make_ext4fs -S /file_contexts -a /cache /dev/block/mmcblk0p3
+make_ext4fs -S /file_contexts -a /cache /dev/block/vdd3
 
 echo "Formatting external_sd..."
 # Format external_sd as vfat
-mkdosfs /dev/block/mmcblk0p4
+mkfs.fat /dev/block/vdd4
+fsck.fat -a /dev/block/vdd4
 
 echo "Mounting new sdcard..."
-mount -t vfat /dev/block/mmcblk0p4 /external_sd
+mount -t vfat /dev/block/vdd4 /external_sd
 echo "Done!"

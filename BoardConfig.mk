@@ -15,7 +15,7 @@ TARGET_ARCH := x86
 TARGET_CPU_ABI := x86
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
-TARGET_ARCH_VARIANT := x86-atom
+TARGET_ARCH_VARIANT := x86
 TARGET_ARCH_VARIANT_FPU := sse
 TARGET_CPU_VARIANT := x86
 
@@ -43,4 +43,4 @@ RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_SDCARD_ON_DATA := true
 TW_EXCLUDE_MTP := true
 # This excludes parted from the build... parted is prebuilt and for arm CPU only
-BOARD_HAS_NO_REAL_SDCARD := true
+#BOARD_HAS_NO_REAL_SDCARD := true
